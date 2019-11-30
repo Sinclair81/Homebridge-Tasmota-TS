@@ -1,0 +1,24 @@
+{
+    "bridge": {
+    "name": "Homebridge",
+    "username": "CC:22:3D:E3:CE:30",
+    "port": 51826,
+    "pin": "031-45-154"
+    },
+
+    "platforms": [],
+
+    "accessories": [
+        {
+            "accessory": "Logo-TS",
+            "name": "Switch ModBus",
+            "interface": "modbus",
+            "ip": "10.0.0.100",
+            "port": 505,
+            "type": "switch",
+            "switchGet": "Q1",
+            "switchSetOn": "V2.0",
+            "switchSetOff": "V3.0"
+        }
+    ]
+}

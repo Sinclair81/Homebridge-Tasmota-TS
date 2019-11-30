@@ -1,0 +1,38 @@
+{
+  "name": "homebridge-tasmota-ts",
+  "version": "0.0.1",
+  "description": "Homebridge-Tasmota-TS! >>> $ npm run <scripts>",
+  "homepage": "https://github.com/sinclair81/homebridge-tasmota-ts",
+  "author": {
+    "name": "Sinclair81",
+    "email": "dev.sinclair81@gmail.com",
+    "url": "https://github.com/sinclair81"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "homebridge-plugin",
+    "homebridge",
+    "tasmota",
+    "gosund"
+  ],
+  "scripts": {
+    "test": "ts-node ./src/index.ts",
+    "build": "./node_modules/.bin/tsc",
+    "start": "node ./dist/index.js"
+  },
+  "engines": {
+    "homebridge": ">=0.2.0",
+    "node": ">=6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
