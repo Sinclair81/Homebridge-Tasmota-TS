@@ -10,15 +10,24 @@
 
     "accessories": [
         {
-            "accessory": "Logo-TS",
-            "name": "Switch ModBus",
-            "interface": "modbus",
+            "accessory": "Tasmota-TS",
+            "name": "WLan socket 1",
+            "device": "Gosund SP111 A V1.1",
             "ip": "10.0.0.100",
-            "port": 505,
-            "type": "switch",
-            "switchGet": "Q1",
-            "switchSetOn": "V2.0",
-            "switchSetOff": "V3.0"
+            "updateInterval": 30000,
+            "debugMsgLog": 1,
+            "type": "switch"
+        },
+        {
+            "accessory": "Tasmota-TS",
+            "name": "WLan socket 2",
+            "device": "Gosund SP111 A V1.1",
+            "ip": "10.0.0.101",
+            "user": "admin",
+            "password": "12345q",
+            "updateInterval": 30000,
+            "debugMsgLog": 1,
+            "type": "switch"
         }
     ]
 }
