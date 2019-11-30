@@ -4,7 +4,7 @@
 [![donate](https://img.shields.io/badge/donate-PayPal-blue.svg)](https://www.paypal.me/Sinclair81)
 
 <!-- markdownlint-disable MD033 -->
-<img src="https://raw.githubusercontent.com/Sinclair81/Homebridge-Tasmota-TS/master/Gosund%20SP111%20A%20V1.1/pic_1.png" align="right" alt="Gosund SP111 A V1.1" height="400" width="200">
+<img src="https://raw.githubusercontent.com/Sinclair81/Homebridge-Tasmota-TS/master/pic.png" align="right" alt="Gosund SP111 A V1.1" height="359" width="355">
 <!-- markdownlint-enable MD033 -->
 
 Control your WLan sockets that are flashed with the [Tasmota firmware](https://github.com/arendst/Tasmota).
