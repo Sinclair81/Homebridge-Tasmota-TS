@@ -69,3 +69,10 @@ You can also view the [full list of supported HomeKit Services and Characteristi
 2. Install: `$ npm install`
 3. Build:   `$ npm run build`
 4. Run:     `$ /usr/local/bin/homebridge -D -P ~/Homebridge-Tasmota-TS/`
+
+## Flash Tasmota Firmware ##
+
+- [Firmware Binary](https://github.com/arendst/Tasmota/releases)
+- [NodeMCU-PyFlasher](https://github.com/marcelstoer/nodemcu-pyflasher)
+- [Tasmota Firmware Wiki](https://tasmota.github.io/docs/#/installation/)
+- Gosund SP111 A V1.1 - Tasmota Config: `{"NAME":"Gosund SP111 A V1.1","GPIO":[57,255,56,255,132,134,0,0,131,17,0,21,0],"FLAG":0,"BASE":45}`
