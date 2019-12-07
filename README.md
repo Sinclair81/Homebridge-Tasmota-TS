@@ -75,4 +75,9 @@ You can also view the [full list of supported HomeKit Services and Characteristi
 - [Firmware Binary](https://github.com/arendst/Tasmota/releases)
 - [NodeMCU-PyFlasher](https://github.com/marcelstoer/nodemcu-pyflasher)
 - [Tasmota Firmware Wiki](https://tasmota.github.io/docs/#/installation/)
-- Gosund SP111 A V1.1 - Tasmota Config: `{"NAME":"Gosund SP111 A V1.1","GPIO":[57,255,56,255,132,134,0,0,131,17,0,21,0],"FLAG":0,"BASE":45}`
+- [Power Monitoring](https://tasmota.github.io/docs/#/Commands?id=power-monitoring)
+- Gosund SP111 A V1.1 - Tasmota Config:  
+  `{"NAME":"Gosund SP111 A V1.1","GPIO":[57,255,56,255,132,134,0,0,131,17,0,21,0],"FLAG":0,"BASE":45}`
+- Set Voltage: `http://10.0.0.100/cm?cmnd=VoltageSet 230` [in Volt]
+- Set CurrentSet: `http://10.0.0.100/cm?cmnd=CurrentSet 326` [in milli Amper]
+- Set Power: `http://10.0.0.100/cm?cmnd=PowerSet 75` [in Watt]
