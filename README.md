@@ -81,3 +81,5 @@ You can also view the [full list of supported HomeKit Services and Characteristi
 - Set Voltage: `http://10.0.0.100/cm?cmnd=VoltageSet 230` [in Volt]
 - Set CurrentSet: `http://10.0.0.100/cm?cmnd=CurrentSet 326` [in milli Amper]
 - Set Power: `http://10.0.0.100/cm?cmnd=PowerSet 75` [in Watt]
+- Disable status LED blinking during Wi-Fi and MQTT connection problems:  
+  `http://10.0.0.100/cm?cmnd=SetOption31 1`
