@@ -27,7 +27,7 @@ Name                     | Value               | Required | Notes
 ------------------------ | ------------------- | -------- | ------------------------
 `accessory`              | "Tasmota-TS"        | yes      | Must be set to "Tasmota-TS".
 `name`                   | (custom)            | yes      | Name of accessory that will appear in homekit app.
-`device`                 | "Generic"           | no       | A Device String e.g. "Gosund SP111 A V1.1"
+`device`                 | "Generic"           | no       | A Device String e.g. "Gosund SP111 A V1.1" or "SMAHO WiFi Plug"
 `ip`                     | "10.0.0.100"        | yes      | Must be set to the IP of your Tasmota Device.
 `user`                   | "none"              | no       | Must be set to the WebUsername - default WebUsername = `admin`.
 `password`               | "none"              | no       | Must be set to the WebPassword .
@@ -40,7 +40,7 @@ Name                     | Value               | Required | Notes
     {
         "accessory": "Tasmota-TS",
         "name": "WLan socket 1",
-        "device": "Gosund SP111 A V1.1",
+        "device": "SMAHO WiFi Plug",
         "ip": "10.0.0.100",
         "updateInterval": 30000,
         "debugMsgLog": 1,
@@ -78,6 +78,8 @@ You can also view the [full list of supported HomeKit Services and Characteristi
 - [Power Monitoring](https://tasmota.github.io/docs/#/Commands?id=power-monitoring)
 - Gosund SP111 A V1.1 - Tasmota Config:  
   `{"NAME":"Gosund SP111 A V1.1","GPIO":[57,255,56,255,132,134,0,0,131,17,0,21,0],"FLAG":0,"BASE":45}`
+- SMAHO WiFi Plug - Tasmota Config:  
+  `{"NAME":"SMAHO WiFi Plug","GPIO":[17,0,0,0,134,132,0,0,131,56,21,0,0],"FLAG":0,"BASE":18}`
 - Set Voltage: `http://10.0.0.100/cm?cmnd=VoltageSet 230` [in Volt]
 - Set CurrentSet: `http://10.0.0.100/cm?cmnd=CurrentSet 326` [in milli Amper]
 - Set Power: `http://10.0.0.100/cm?cmnd=PowerSet 75` [in Watt]
