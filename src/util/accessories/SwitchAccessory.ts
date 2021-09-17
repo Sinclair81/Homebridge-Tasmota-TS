@@ -47,8 +47,10 @@ export class SwitchAccessory {
   // Tasmota Switch Service
   //
 
-  getSwitchOn = async () => {
+// async getSwitchOn(): Promise<boolean> {
 
+  getSwitchOn = async () => {
+  
     // Cancel timer if the call came from the Home-App and not from the update interval.
     // To avoid duplicate queries at the same time.
     if (this.updateInterval > 0) {
@@ -63,34 +65,37 @@ export class SwitchAccessory {
     this.request(requestString, async (error: any, res: { statusCode: number; }, body: string) => {
         if (error) {
           this.log(`error: : ${error}`);
-          return;
-        }
+        } else {
 
-        if (res.statusCode == 200) {
-          let obj = JSON.parse(body.toLowerCase());
-          
-          const on = obj.power == "on" ? true : false;
-          this.debugLogBool("Switch ?", on);
+          if (res.statusCode == 200) {
+            let obj = JSON.parse(body.toLowerCase());
+            
+            const on = obj.power == "on" ? true : false;
+            this.debugLogBool("Switch ?", on);
 
-          await wait(1);
+            await wait(1);
 
-          this.switchService.updateCharacteristic(
-            Characteristic.On,
-            on
-          );
+            this.switchService.updateCharacteristic(
+              Characteristic.On,
+              on as boolean
+            );
 
-          if (obj.warning) {
-            this.log("Warning: " + obj.warning);
+            if (obj.warning) {
+              this.log("Warning: " + obj.warning);
+            }
+
+          }
+
+          if (this.updateInterval > 0) {
+            this.switchAutoUpdate();
           }
 
         }
 
-        if (this.updateInterval > 0) {
-          this.switchAutoUpdate();
-        }
-
       }
     );
+
+    return false;
 
   };
 
@@ -106,30 +111,31 @@ export class SwitchAccessory {
     this.request(requestString, async (error: any, res: { statusCode: number; }, body: string) => {
         if (error) {
           this.log(`error: : ${error}`);
-          return;
-        }
+        } else {
 
-        if (res.statusCode == 200) {
-          let obj = JSON.parse(body.toLowerCase());
-          
-          const on = obj.power == "on" ? true : false;
-          this.debugLogBool("Switch ?", on);
+          if (res.statusCode == 200) {
+            let obj = JSON.parse(body.toLowerCase());
+            
+            const on = obj.power == "on" ? true : false;
+            this.debugLogBool("Switch ?", on);
 
-          await wait(1);
+            await wait(1);
 
-          this.switchService.updateCharacteristic(
-            Characteristic.On,
-            on
-          );
+            this.switchService.updateCharacteristic(
+              Characteristic.On,
+              on as boolean
+            );
 
-          if (obj.warning) {
-            this.log("Warning: " + obj.warning);
+            if (obj.warning) {
+              this.log("Warning: " + obj.warning);
+            }
+
           }
 
-        }
+          if (this.updateInterval > 0) {
+            this.switchAutoUpdate();
+          }
 
-        if (this.updateInterval > 0) {
-          this.switchAutoUpdate();
         }
 
       }

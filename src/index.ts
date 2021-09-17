@@ -1,6 +1,6 @@
 import { wait } from "./util/wait";
 import { md5 } from "./util/md5";
-import callbackify from "./util/callbackify";
+// import callbackify from "./util/callbackify";
 
 import { SwitchAccessory } from "./util/accessories/SwitchAccessory"
 
@@ -70,8 +70,13 @@ class TasmotaAccessory {
 
       switchService
         .getCharacteristic(Characteristic.On)
-        .on("get", callbackify(this.switchAccessory.getSwitchOn))
-        .on("set", callbackify(this.switchAccessory.setSwitchOn));
+        .onGet(this.switchAccessory.getSwitchOn.bind(this))
+        .onSet(this.switchAccessory.setSwitchOn.bind(this));
+
+      // switchService
+      //   .getCharacteristic(Characteristic.On)
+      //   .on("get", callbackify(this.switchAccessory.getSwitchOn))
+      //   .on("set", callbackify(this.switchAccessory.setSwitchOn));
 
       this.serviceToExpose = switchService;
 
@@ -83,10 +88,10 @@ class TasmotaAccessory {
      * LOGO! Accessory Information Service *
      ***************************************/
 
-    this.manufacturer     =  config["manufacturer"]     || pjson.author.name;
-    this.model            =  config["model"]            || this.typeName + " @ " + this.device;
-    this.serialNumber     =  config["serialNumber"]     || md5(this.name + this.typeName);
-    this.firmwareRevision =  config["firmwareRevision"] || pjson.version;
+    this.manufacturer     =  config["manufacturer"]     || pjson.author.name;
+    this.model            =  config["model"]            || this.typeName + " @ " + this.device;
+    this.serialNumber     =  config["serialNumber"]     || md5(this.name + this.typeName);
+    this.firmwareRevision =  config["firmwareRevision"] || pjson.version;
     
   }
 
