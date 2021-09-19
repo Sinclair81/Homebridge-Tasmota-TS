@@ -64,7 +64,11 @@ export class SwitchAccessory {
 
     this.request(requestString, async (error: any, res: { statusCode: number; }, body: string) => {
         if (error) {
-          this.log(`error: : ${error}`);
+          let errorString = error.toString();
+          let hosteUnreach = errorString.includes("EHOSTUNREACH");
+          if (!hosteUnreach) {
+            this.log(`error: : ${error}`);
+          }
         } else {
 
           if (res.statusCode == 200) {

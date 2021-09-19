@@ -18,7 +18,7 @@ __Type of Accessory:__
 1. Install homebridge using: `sudo npm install -g --unsafe-perm homebridge`
 2. Install homebridge-config-ui-x using: `sudo npm install -g --unsafe-perm homebridge-config-ui-x`
 3. Update your configuration file with this guide: [smartapfel.de](https://smartapfel.de/homebridge/plugins-installieren/)
-4. Install homebridge-tasmota-ts using: homebridge-config-ui-x's Webserver
+4. Install homebridge-tasmota-ts using: homebridge-config-ui-x's Webserver (Homebridge must be started with sudo for the installation.)
 5. Update your configuration file with code like the sample below
 
 ## Homebridge-Tasmota-TS Main Configuration Parameters ##
