@@ -77,7 +77,7 @@ export class SwitchAccessory {
           if (res.statusCode == 200) {
             let obj = JSON.parse(body.toLowerCase());
             
-            const on = obj.power == "on" ? true : false;
+            const on = this.checkReturnJSON(obj);
             this.debugLogBool("Switch ?", on);
 
             await wait(1);
@@ -123,7 +123,7 @@ export class SwitchAccessory {
           if (res.statusCode == 200) {
             let obj = JSON.parse(body.toLowerCase());
             
-            const on = obj.power == "on" ? true : false;
+            const on = this.checkReturnJSON(obj);
             this.debugLogBool("Switch ?", on);
 
             await wait(1);
@@ -153,6 +153,41 @@ export class SwitchAccessory {
   //
   // Helper Functions
   //
+
+  checkReturnJSON(obj: any): boolean { 
+    let on = false;
+    if (obj.hasOwnProperty('power')){
+      on = obj.power == "on" ? true : false;
+    }
+    if (obj.hasOwnProperty('power1')){
+      on = obj.power1 == "on" ? true : false;
+    }
+    if (obj.hasOwnProperty('power2')){
+      on = obj.power2 == "on" ? true : false;
+    }
+    if (obj.hasOwnProperty('power3')){
+      on = obj.power3 == "on" ? true : false;
+    }
+    if (obj.hasOwnProperty('power4')){
+      on = obj.power4 == "on" ? true : false;
+    }
+    if (obj.hasOwnProperty('power5')){
+      on = obj.power5 == "on" ? true : false;
+    }
+    if (obj.hasOwnProperty('power6')){
+      on = obj.power6 == "on" ? true : false;
+    }
+    if (obj.hasOwnProperty('power7')){
+      on = obj.power7 == "on" ? true : false;
+    }
+    if (obj.hasOwnProperty('power8')){
+      on = obj.power8 == "on" ? true : false;
+    }
+    if (obj.hasOwnProperty('power9')){
+      on = obj.power9 == "on" ? true : false;
+    }
+    return on;
+  }
 
   debugLogNum(msg: string, num: number) {
     if (this.debugMsgLog == 1) {
