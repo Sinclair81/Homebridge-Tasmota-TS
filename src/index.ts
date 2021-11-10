@@ -26,6 +26,7 @@ class TasmotaAccessory {
   serialNumber: string
   firmwareRevision: string;
   ip: string;
+  relais: number;
   user: string;
   password: string;
   updateInterval: number;
@@ -47,6 +48,7 @@ class TasmotaAccessory {
     this.name           = config["name"];
     this.device         = config["device"]         || "Generic";
     this.ip             = config["ip"];
+    this.relais         = config["relais"]         || 1;
     this.user           = config["user"]           || "none";
     this.password       = config["password"]       || "none";
     this.updateInterval = config["updateInterval"] || 0;
@@ -61,7 +63,7 @@ class TasmotaAccessory {
     if (this.type == SwitchAccessory.switchType) {
       this.typeName = SwitchAccessory.infoModel;
 
-      this.switchAccessory = new SwitchAccessory(this.log, request, this.ip, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
+      this.switchAccessory = new SwitchAccessory(this.log, request, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
 
       const switchService = new Service.Switch(
         null,

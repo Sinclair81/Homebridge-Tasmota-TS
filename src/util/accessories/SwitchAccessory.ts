@@ -12,6 +12,7 @@ export class SwitchAccessory {
   log: Function;
   request: any;
   ip: string;
+  relais: number;
   user: string;
   password: string;
   updateInterval: number;
@@ -21,6 +22,7 @@ export class SwitchAccessory {
   constructor(log: Function,
               request: any,
               ip: string,
+              relais: number,
               user: string,
               password: string,
               updateInterval: number,
@@ -31,6 +33,7 @@ export class SwitchAccessory {
     this.log            = log;
     this.request        = request;
     this.ip             = ip;
+    this.relais         = relais;
     this.user           = user;
     this.password       = password;
     this.updateInterval = updateInterval;
@@ -60,7 +63,7 @@ export class SwitchAccessory {
 
     let userPasswordString = ((this.user != "none") && (this.password != "none")) ? "user=" + this.user + "&password=" + this.password + "&" : "";
 
-    let requestString = "http://" + this.ip + "/cm?" + userPasswordString + "cmnd=Power Status";
+    let requestString = "http://" + this.ip + "/cm?" + userPasswordString + "cmnd=Power" + String(this.relais) + " Status";
 
     this.request(requestString, async (error: any, res: { statusCode: number; }, body: string) => {
         if (error) {
@@ -110,7 +113,7 @@ export class SwitchAccessory {
 
     let userPasswordString = ((this.user != "none") && (this.password != "none")) ? "user=" + this.user + "&password=" + this.password + "&" : "";
 
-    let requestString = "http://" + this.ip + "/cm?" + userPasswordString + "cmnd=Power " + onString;
+    let requestString = "http://" + this.ip + "/cm?" + userPasswordString + "cmnd=Power" + String(this.relais) + " " + onString;
 
     this.request(requestString, async (error: any, res: { statusCode: number; }, body: string) => {
         if (error) {

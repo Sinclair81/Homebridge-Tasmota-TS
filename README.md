@@ -29,6 +29,7 @@ Name                     | Value               | Required | Notes
 `name`                   | (custom)            | yes      | Name of accessory that will appear in homekit app.
 `device`                 | "Generic"           | no       | A Device String e.g. "Gosund SP111 A V1.1" or "SMAHO WiFi Plug"
 `ip`                     | "10.0.0.100"        | yes      | Must be set to the IP of your Tasmota Device.
+`relais`                 | 1                   | no       | Relais Number - default is 1
 `user`                   | "none"              | no       | Must be set to the WebUsername - default WebUsername = `admin`.
 `password`               | "none"              | no       | Must be set to the WebPassword .
 `updateInterval`         | 0                   | no       | Auto Update Interval in milliseconds, 0 = Off
@@ -51,6 +52,7 @@ Name                     | Value               | Required | Notes
         "name": "WLan socket 2",
         "device": "Gosund SP111 A V1.1",
         "ip": "10.0.0.101",
+        "relais": 1,
         "user": "admin",
         "password": "12345",
         "updateInterval": 30000,
@@ -68,7 +70,7 @@ You can also view the [full list of supported HomeKit Services and Characteristi
 1. Download or clone Homebridge-Tasmota-TS.
 2. Install: `$ npm install`
 3. Build:   `$ npm run build`
-4. Run:     `$ /usr/local/bin/homebridge -D -P ~/Homebridge-Tasmota-TS/`
+4. Run:     `$ homebridge -D -P ~/Homebridge-Tasmota-TS`
 
 ## Flash Tasmota Firmware ##
 
