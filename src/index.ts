@@ -1,7 +1,9 @@
 import { wait } from "./util/wait";
 import { md5 } from "./util/md5";
 
-import { SwitchAccessory } from "./util/accessories/SwitchAccessory"
+import { SwitchAccessory }    from "./util/accessories/SwitchAccessory"
+import { LightbulbAccessory } from "./util/accessories/LightbulbAccessory"
+import { OutletAccessory }    from "./util/accessories/OutletAccessory"
 
 const request = require('request');
 const pjson   = require('../package.json');
@@ -40,7 +42,9 @@ class TasmotaAccessory {
   serviceToExpose: any;
   infoService:     any;
 
-  switchAccessory: SwitchAccessory | undefined;
+  switchAccessory:    SwitchAccessory    | undefined;
+  lightbulbAccessory: LightbulbAccessory | undefined;
+  outletAccessory:    OutletAccessory    | undefined;
 
   constructor(log: any, config: any) {
     this.log            = log;
@@ -80,9 +84,59 @@ class TasmotaAccessory {
 
     }
 
-    /***************************************
-     * LOGO! Accessory Information Service *
-     ***************************************/
+    /*****************************
+     * Tasmota Lightbulb Service *
+     *****************************/
+
+    if (this.type == LightbulbAccessory.lightbulbType) {
+      this.typeName = LightbulbAccessory.infoModel;
+
+      this.lightbulbAccessory = new LightbulbAccessory(this.log, request, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
+
+      const lightbulbService = new Service.Lightbulb(
+        null,
+        LightbulbAccessory.lightbulbType,
+      );
+
+      lightbulbService
+        .getCharacteristic(Characteristic.On)
+        .onGet(this.lightbulbAccessory.getLightbulbOn.bind(this))
+        .onSet(this.lightbulbAccessory.setLightbulbOn.bind(this));
+
+      this.serviceToExpose = lightbulbService;
+
+      this.lightbulbAccessory.lightbulbService = this.serviceToExpose;
+
+    }
+
+    /**************************
+     * Tasmota Outlet Service *
+     **************************/
+
+    if (this.type == OutletAccessory.outletType) {
+      this.typeName = OutletAccessory.infoModel;
+
+      this.outletAccessory = new OutletAccessory(this.log, request, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
+
+      const outletService = new Service.Outlet(
+        null,
+        OutletAccessory.outletType,
+      );
+
+      outletService
+        .getCharacteristic(Characteristic.On)
+        .onGet(this.outletAccessory.getOutletOn.bind(this))
+        .onSet(this.outletAccessory.setOutletOn.bind(this));
+
+      this.serviceToExpose = outletService;
+
+      this.outletAccessory.outletService = this.serviceToExpose;
+
+    }
+
+    /*****************************************
+     * Tasmota Accessory Information Service *
+     *****************************************/
 
     this.manufacturer     =  config["manufacturer"]     || pjson.author.name;
     this.model            =  config["model"]            || this.typeName + " @ " + this.device;

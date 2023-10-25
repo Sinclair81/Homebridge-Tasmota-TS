@@ -2,12 +2,12 @@ import { wait } from "../wait";
 
 let Characteristic: any;
 
-export class SwitchAccessory {
+export class OutletAccessory {
 
-  static switchType: string = "switch";
-  static infoModel: string  = "Switch";
+  static outletType: string = "outlet";
+  static infoModel: string  = "Outlet";
 
-  public switchService: any;
+  public outletService: any;
 
   log: Function;
   request: any;
@@ -41,16 +41,16 @@ export class SwitchAccessory {
     Characteristic      = characteristic;
 
     if (this.updateInterval > 0) {
-      this.switchAutoUpdate();
+      this.outletAutoUpdate();
     }
 
   }
 
   //
-  // Tasmota Switch Service
+  // Tasmota Outlet Service
   //
 
-  getSwitchOn = async () => {
+  getOutletOn = async () => {
   
     // Cancel timer if the call came from the Home-App and not from the update interval.
     // To avoid duplicate queries at the same time.
@@ -76,11 +76,11 @@ export class SwitchAccessory {
             let obj = JSON.parse(body.toLowerCase());
             
             const on = this.checkReturnJSON(obj);
-            this.debugLogBool("Switch ?", on);
+            this.debugLogBool("Outlet ?", on);
 
             await wait(1);
 
-            this.switchService.updateCharacteristic(
+            this.outletService.updateCharacteristic(
               Characteristic.On,
               on as boolean
             );
@@ -92,7 +92,7 @@ export class SwitchAccessory {
           }
 
           if (this.updateInterval > 0) {
-            this.switchAutoUpdate();
+            this.outletAutoUpdate();
           }
 
         }
@@ -104,8 +104,8 @@ export class SwitchAccessory {
 
   };
 
-  setSwitchOn = async (on: boolean) => {
-    this.debugLogBool("Set switch to", on);
+  setOutletOn = async (on: boolean) => {
+    this.debugLogBool("Set outlet to", on);
 
     let onString = on == true ? "On" : "Off";
 
@@ -122,11 +122,11 @@ export class SwitchAccessory {
             let obj = JSON.parse(body.toLowerCase());
             
             const on = this.checkReturnJSON(obj);
-            this.debugLogBool("Switch ?", on);
+            this.debugLogBool("Outlet ?", on);
 
             await wait(1);
 
-            this.switchService.updateCharacteristic(
+            this.outletService.updateCharacteristic(
               Characteristic.On,
               on as boolean
             );
@@ -138,7 +138,7 @@ export class SwitchAccessory {
           }
 
           if (this.updateInterval > 0) {
-            this.switchAutoUpdate();
+            this.outletAutoUpdate();
           }
 
         }
@@ -198,11 +198,11 @@ export class SwitchAccessory {
     }
   }
 
-  switchAutoUpdate() {
+  outletAutoUpdate() {
 
     this.updateTimer = setTimeout(() => {
 
-      this.getSwitchOn();
+      this.getOutletOn();
 
     }, this.updateInterval + Math.floor(Math.random() * 10000));
 

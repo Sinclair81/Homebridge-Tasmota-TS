@@ -12,6 +12,8 @@ Control your WLan sockets that are flashed with the [Tasmota firmware](https://g
 __Type of Accessory:__
 
 - Switch
+- Lightbulb
+- Outlet
 
 ## Installation ##
 
@@ -27,12 +29,12 @@ Name                     | Value               | Required | Notes
 `name`                   | (custom)            | yes      | Name of accessory that will appear in homekit app.
 `device`                 | "Generic"           | no       | A Device String e.g. "Gosund SP111 A V1.1" or "SMAHO WiFi Plug"
 `ip`                     | "10.0.0.100"        | yes      | Must be set to the IP of your Tasmota Device.
-`relais`                 | 1                   | no       | Relais Number - default is 1
+`relais`                 | 1                   | no       | Relais Number - default is `1`
 `user`                   | "none"              | no       | Must be set to the WebUsername - default WebUsername = `admin`.
 `password`               | "none"              | no       | Must be set to the WebPassword .
-`updateInterval`         | 0                   | no       | Auto Update Interval in milliseconds, 0 = Off
-`debugMsgLog`            | 0                   | no       | 1 - Displays messages of accessories in the log.
-`type`                   | "switch"            | yes      | Type of Accessory: "switch"
+`updateInterval`         | 0                   | no       | Auto Update Interval in milliseconds, `0` = Off
+`debugMsgLog`            | 0                   | no       | `1` - Displays messages of accessories in the log.
+`type`                   | "switch"            | no       | Type of Accessory: `"switch"`, `"lightbulb"` or `"outlet"` - default is `"switch"`
 
 ```json
 "accessories": [
