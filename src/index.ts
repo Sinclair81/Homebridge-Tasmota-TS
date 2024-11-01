@@ -5,7 +5,11 @@ import { SwitchAccessory }    from "./util/accessories/SwitchAccessory"
 import { LightbulbAccessory } from "./util/accessories/LightbulbAccessory"
 import { OutletAccessory }    from "./util/accessories/OutletAccessory"
 
-const request = require('request');
+// const request = require('request');
+
+// @ts-nocheck @ts-ignore
+import axios from 'axios';
+
 const pjson   = require('../package.json');
 
 let Service: any, Characteristic: any;
@@ -66,7 +70,8 @@ class TasmotaAccessory {
     if (this.type == SwitchAccessory.switchType) {
       this.typeName = SwitchAccessory.infoModel;
 
-      this.switchAccessory = new SwitchAccessory(this.log, request, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
+      // this.switchAccessory = new SwitchAccessory(this.log, request, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
+      this.switchAccessory = new SwitchAccessory(this.log, axios, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
 
       const switchService = new Service.Switch(
         null,
@@ -91,7 +96,8 @@ class TasmotaAccessory {
     if (this.type == LightbulbAccessory.lightbulbType) {
       this.typeName = LightbulbAccessory.infoModel;
 
-      this.lightbulbAccessory = new LightbulbAccessory(this.log, request, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
+      // this.lightbulbAccessory = new LightbulbAccessory(this.log, request, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
+      this.lightbulbAccessory = new LightbulbAccessory(this.log, axios, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
 
       const lightbulbService = new Service.Lightbulb(
         null,
@@ -116,7 +122,8 @@ class TasmotaAccessory {
     if (this.type == OutletAccessory.outletType) {
       this.typeName = OutletAccessory.infoModel;
 
-      this.outletAccessory = new OutletAccessory(this.log, request, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
+      // this.outletAccessory = new OutletAccessory(this.log, request, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
+      this.outletAccessory = new OutletAccessory(this.log, axios, this.ip, this.relais, this.user, this.password, this.updateInterval, this.debugMsgLog, Characteristic);
 
       const outletService = new Service.Outlet(
         null,

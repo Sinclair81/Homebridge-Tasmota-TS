@@ -10,7 +10,7 @@ export class OutletAccessory {
   public outletService: any;
 
   log: Function;
-  request: any;
+  axios: any;
   ip: string;
   relais: number;
   user: string;
@@ -20,7 +20,7 @@ export class OutletAccessory {
   updateTimer: any;
 
   constructor(log: Function,
-              request: any,
+              axios: any,
               ip: string,
               relais: number,
               user: string,
@@ -31,7 +31,7 @@ export class OutletAccessory {
               ) {
 
     this.log            = log;
-    this.request        = request;
+    this.axios          = axios;
     this.ip             = ip;
     this.relais         = relais;
     this.user           = user;
@@ -63,42 +63,41 @@ export class OutletAccessory {
 
     let requestString = "http://" + this.ip + "/cm?" + userPasswordString + "cmnd=Power" + String(this.relais) + " Status";
 
-    this.request(requestString, async (error: any, res: { statusCode: number; }, body: string) => {
-        if (error) {
-          let errorString = error.toString();
+    this.axios.get(requestString)
+    .then(response => {
+
+      if (response.status == 200) {
+
+        let oldJsonString = JSON.stringify(response.data);
+        let newJsonString = oldJsonString.toLowerCase();
+        let newJson = JSON.parse(newJsonString);
+
+        if (newJson.warning) {
+          this.log("Warning: " + newJson.warning);
+        }
+        
+        const on = this.checkReturnJSON(newJson);
+        this.debugLogBool("Outlet ?", on);
+
+        this.outletService.updateCharacteristic(
+          Characteristic.On,
+          on as boolean
+        );
+
+      }
+
+      if (this.updateInterval > 0) {
+        this.outletAutoUpdate();
+      }
+
+    })
+    .catch(error => {
+      let errorString = error.toString();
           let hosteUnreach = errorString.includes("EHOSTUNREACH");
           if (!hosteUnreach) {
             this.log(`error: : ${error}`);
           }
-        } else {
-
-          if (res.statusCode == 200) {
-            let obj = JSON.parse(body.toLowerCase());
-            
-            const on = this.checkReturnJSON(obj);
-            this.debugLogBool("Outlet ?", on);
-
-            await wait(1);
-
-            this.outletService.updateCharacteristic(
-              Characteristic.On,
-              on as boolean
-            );
-
-            if (obj.warning) {
-              this.log("Warning: " + obj.warning);
-            }
-
-          }
-
-          if (this.updateInterval > 0) {
-            this.outletAutoUpdate();
-          }
-
-        }
-
-      }
-    );
+    });
 
     return false;
 
@@ -113,38 +112,41 @@ export class OutletAccessory {
 
     let requestString = "http://" + this.ip + "/cm?" + userPasswordString + "cmnd=Power" + String(this.relais) + " " + onString;
 
-    this.request(requestString, async (error: any, res: { statusCode: number; }, body: string) => {
-        if (error) {
-          this.log(`error: : ${error}`);
-        } else {
+    this.axios.get(requestString)
+    .then(response => {
 
-          if (res.statusCode == 200) {
-            let obj = JSON.parse(body.toLowerCase());
-            
-            const on = this.checkReturnJSON(obj);
-            this.debugLogBool("Outlet ?", on);
+      if (response.status == 200) {
 
-            await wait(1);
+        let oldJsonString = JSON.stringify(response.data);
+        let newJsonString = oldJsonString.toLowerCase();
+        let newJson = JSON.parse(newJsonString);
 
-            this.outletService.updateCharacteristic(
-              Characteristic.On,
-              on as boolean
-            );
+        if (newJson.warning) {
+          this.log("Warning: " + newJson.warning);
+        }
+        
+        const on = this.checkReturnJSON(newJson);
+        this.debugLogBool("Outlet ?", on);
 
-            if (obj.warning) {
-              this.log("Warning: " + obj.warning);
-            }
+        this.outletService.updateCharacteristic(
+          Characteristic.On,
+          on as boolean
+        );
 
-          }
-
-          if (this.updateInterval > 0) {
-            this.outletAutoUpdate();
-          }
-
+        if (this.updateInterval > 0) {
+          this.outletAutoUpdate();
         }
 
       }
-    );
+
+    })
+    .catch(error => {
+      let errorString = error.toString();
+          let hosteUnreach = errorString.includes("EHOSTUNREACH");
+          if (!hosteUnreach) {
+            this.log(`error: : ${error}`);
+          }
+    });
 
   };
 
