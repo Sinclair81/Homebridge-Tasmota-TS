@@ -64,7 +64,7 @@ export class SwitchAccessory {
     let requestString = "http://" + this.ip + "/cm?" + userPasswordString + "cmnd=Power" + String(this.relais) + " Status";
 
     this.axios.get(requestString)
-    .then(response => {
+    .then((response: any) => {
 
       if (response.status == 200) {
 
@@ -91,7 +91,7 @@ export class SwitchAccessory {
       }
 
     })
-    .catch(error => {
+    .catch((error: any) => {
       let errorString = error.toString();
           let hosteUnreach = errorString.includes("EHOSTUNREACH");
           if (!hosteUnreach) {
@@ -113,7 +113,7 @@ export class SwitchAccessory {
     let requestString = "http://" + this.ip + "/cm?" + userPasswordString + "cmnd=Power" + String(this.relais) + " " + onString;
 
     this.axios.get(requestString)
-    .then(response => {
+    .then((response: any) => {
 
       if (response.status == 200) {
 
@@ -140,7 +140,7 @@ export class SwitchAccessory {
       }
 
     })
-    .catch(error => {
+    .catch((error: any) => {
       let errorString = error.toString();
           let hosteUnreach = errorString.includes("EHOSTUNREACH");
           if (!hosteUnreach) {
